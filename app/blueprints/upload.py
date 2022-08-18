@@ -11,21 +11,21 @@ def single_file():
 
         # File was submitted
 
-        uploaded_file = request.files['uploaded_file']
+        for uploaded_file in request.files.getlist('uploaded_file'):
         
-        if uploaded_file.filename != '':
+            if uploaded_file.filename != '':
 
-            prefix = 'upload_'
+                prefix = 'upload_'
 
-            from datetime import datetime
-            upload_time = datetime.utcnow().strftime("%m%d%Y_%H%M%S")
+                from datetime import datetime
+                upload_time = datetime.utcnow().strftime("%m%d%Y_%H%M%S")
 
-            import os
-            file_path = os.path.join(user_file_directory, prefix + upload_time)
+                import os
+                file_path = os.path.join(user_file_directory, prefix + upload_time)
 
-            os.makedirs(file_path, exist_ok=True)
+                os.makedirs(file_path, exist_ok=True)
 
-            uploaded_file.save(file_path + '/' + uploaded_file.filename)
+                uploaded_file.save(file_path + '/' + uploaded_file.filename)
         
         return redirect(url_for('index'))
 
