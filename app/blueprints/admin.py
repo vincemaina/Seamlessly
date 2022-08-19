@@ -52,7 +52,7 @@ def purge_generated_media():
     from pathlib import Path
     import shutil
 
-    dirpath = Path('app/generated_media')
+    dirpath = Path('app/static/generated_media')
     if dirpath.exists() and dirpath.is_dir():
         shutil.rmtree(dirpath)
         print('Removed directory.')
@@ -61,8 +61,6 @@ def purge_generated_media():
 
 @bp.route('/view_generated_media', methods=['GET', 'POST'])
 def view_generated_media():
-
-    root = 'generated_media'
 
     if request.method == 'POST':
 
@@ -75,13 +73,9 @@ def view_generated_media():
 
             from pathlib import Path
 
+            root = 'static/generated_media'
+
             file_path = Path(root, request.form['file_to_download'])
-
-            # root, subdirectory, file_name = file_path.parts
-
-            # print('PATH:', file_path)
-
-            # print('FILE NAME:', file_name)
 
             return send_file(file_path)
 
@@ -90,7 +84,7 @@ def view_generated_media():
 
     generated_media_directory = {}
 
-    root = 'app/generated_media'
+    root = 'app/static/generated_media'
 
     with current_app.app_context():
         for path, subdirs, files in os.walk(root):
