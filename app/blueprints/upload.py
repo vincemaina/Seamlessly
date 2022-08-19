@@ -1,8 +1,19 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 
-bp = Blueprint('upload', __name__, '/upload')
+bp = Blueprint('upload', __name__, url_prefix='/upload')
 
 user_file_directory = './user_files/'
+
+output_file_types = {
+    'Web-Optimised Background Animation': 'webp',
+    'Web-Optimised Background Image': 'webp',
+    'Mp4': 'mp4',
+    'WebP': 'webp',
+    'Gif': 'gif',
+    'APng': 'APng',
+    'Jpeg': 'jpg',
+    'Png': 'png'
+}
 
 @bp.route('/', methods=['GET', 'POST'])
 def single_file():
@@ -26,16 +37,25 @@ def single_file():
                 os.makedirs(file_path, exist_ok=True)
 
                 uploaded_file.save(file_path + '/' + uploaded_file.filename)
-        
-        return redirect(url_for('index'))
 
-    output_file_types = {
-        'Mp4': '.mp4',
-        'WebP': '.webp',
-        'Gif': '.gif',
-        'APng': '.APng',
-        'Jpeg': '.jpg',
-        'Png': '.png'
-    }
+        output_format = output_file_types[request.form['file_format']]
+
+
+        # Conditional statements are to prevent the programming from crashing if no crop_width or crop_height is provided.
+
+        if request.form['crop_width']:
+            crop_width = int(request.form['crop_width'])
+        else:
+            crop_width = None
+        
+        if request.form['crop_height']:
+            crop_height = int(request.form['crop_height'])
+        else:
+            crop_height = None
+
+
+        print(output_format, crop_width, crop_height)
+        
+        return redirect(url_for('process.single_file', upload_folder=prefix+upload_time, file_name=uploaded_file.filename, output_format=output_format, crop_width=crop_width, crop_height=crop_height))
 
     return render_template('file_upload/file_upload.html', output_file_types=output_file_types)
