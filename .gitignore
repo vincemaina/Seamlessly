@@ -674,3 +674,8 @@ FodyWeavers.xsd
 
 # End of https://www.toptal.com/developers/gitignore/api/python,flask,visualstudiocode,visualstudio,elasticbeanstalk
 app/static/js/upload_progress.js
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
