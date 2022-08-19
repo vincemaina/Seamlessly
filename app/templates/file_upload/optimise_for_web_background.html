@@ -1,14 +1,40 @@
 {% extends 'layouts/hero_banner_full_height.html' %}
 
+{% block hero_body %}
+<div class="hero-body">
+    <div class="container box has-text-left pt-6 pb-6">
+        <div class="column is-8 is-offset-2">
+            <h1 class="title is-size-1" style="color: black;">
+                Preview CSS Background
+            </h1>
+            <div>
+                <p class="subtitle" style="color: black;">
+                    Use this page to configure your css background.
+                </p>
+            </div>
+            <div class="field">
+                <label for="background-size-slider" class="label">Background size:</label>
+                <div class="control">
+                    <input type="range" min='10' max='1000' name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)">
+                    <!-- <input class="input" type="number" name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
 {% block body %}
 <style>
     #top-hero-banner {
         background: url("{{url_for('static', filename=file_path)}}");
         background-size: 500px;
+        background-attachment: initial;
     }
 
     #navbar-id {
         background-color: black;
     }
 </style>
+<script src="{{url_for('static', filename='js/css_configure.js')}}"></script>
 {% endblock %}
