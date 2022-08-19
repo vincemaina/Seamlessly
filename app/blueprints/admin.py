@@ -26,7 +26,7 @@ def view_user_files():
             purge_cache()
 
     import os
-    import pathlib
+    from pathlib import Path
 
     root = 'user_files'
     user_files_directory = {}
@@ -34,7 +34,7 @@ def view_user_files():
     with current_app.app_context():
         for path, subdirs, files in os.walk(root):
             for name in files:
-                root_directory, sub_directory, file = pathlib.PurePath(path, name).parts
+                root_directory, sub_directory, file = Path(path, name).parts
                 try:
                     user_files_directory[sub_directory]
                 except:
