@@ -40,7 +40,8 @@ def ensure_even_dimensions(width, height):
 
 def crop_video(source, crop_width, crop_height, crop_position_x, crop_position_y, fps):
 
-    cropped_video = source.filter('crop', w=crop_width, h=crop_height, x=crop_position_x, y=crop_position_y).filter('fps', fps=fps, round='up')
+    cropped_video = source.filter('crop', w=crop_width, h=crop_height, x=crop_position_x, y=crop_position_y)
+    # .filter('fps', fps=fps, round='up')
 
     width = crop_width
     height = crop_height
@@ -87,9 +88,10 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
     # Placing a limit of the dimensions of this image
     width, height = limit_dimensions(width, height)
 
+    # Crop file
+    # input_file, width, height = crop_video(input_file, crop_width, crop_height, crop_position_x, crop_position_y, fps)
 
     # Defining dimensions of the tile
-
     tile_width = width * 2
     tile_height = height * 2
 
