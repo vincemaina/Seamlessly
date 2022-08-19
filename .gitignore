@@ -1,5 +1,4 @@
 user_files/
-image_generator/
 generated_media/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,flask,visualstudiocode,visualstudio,elasticbeanstalk
