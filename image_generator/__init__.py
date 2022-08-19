@@ -151,6 +151,7 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
 
     return output_location
 
+
 if __name__ == '__main__':
 
     generate('user_files/upload_08192022_105858/y-so-serious.png', 'png')
