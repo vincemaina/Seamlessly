@@ -34,9 +34,9 @@ def create_app(test_config=None):
 
     homepage = 'upload.single_file'
 
-    app.add_url_rule('/', endpoint=homepage)
+    app.add_url_rule('/', endpoint=homepage, methods=['GET', 'POST'])
 
-    @app.route('/home')
+    @app.route('/home', methods=['GET', 'POST'])
     def index():
         from flask import redirect, url_for
         return redirect(url_for(homepage))
