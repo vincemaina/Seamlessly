@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, send_file
+from flask import Blueprint, render_template, request, send_file, redirect, url_for
 
 bp = Blueprint('process', __name__, url_prefix='/process')
 
@@ -20,10 +20,7 @@ def single_file():
     from image_generator import generate
 
     output_path = generate(file_path, output_format)
-    print('OUTPUT', output_path)
 
-    output_path = output_path.replace('app/', '')
+    output_path = output_path.replace('app/static/', '')
 
-    print('OUTPUT', output_path)
-
-    return send_file(output_path)
+    return redirect(url_for('configure_css.configure', file=output_path))
