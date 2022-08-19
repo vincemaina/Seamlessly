@@ -1,0 +1,14 @@
+{% extends 'layouts/hero_banner_full_height.html' %}
+
+{% block body %}
+<style>
+    #top-hero-banner {
+        background: url("{{url_for('static', filename=file_path)}}");
+        background-size: 500px;
+    }
+
+    #navbar-id {
+        background-color: black;
+    }
+</style>
+{% endblock %}

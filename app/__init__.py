@@ -53,6 +53,9 @@ def create_app(test_config=None):
     from . blueprints import admin
     app.register_blueprint(admin.bp)
 
+    from . blueprints import configure_css_background
+    app.register_blueprint(configure_css_background.bp)
+
     return app
 
 
