@@ -122,7 +122,7 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
 
     # Directory for generated files
 
-    generated_file_directory = 'app/generated_media'
+    generated_file_directory = 'app/static/generated_media'
     prefix = 'download_'
 
     import os
