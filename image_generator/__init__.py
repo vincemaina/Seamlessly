@@ -60,7 +60,7 @@ def get_file_name(file_path):
 
     file_extensions = "".join(file_name.suffixes)
     
-    file_name = str(file_name).removesuffix(file_extensions)
+    file_name = str(file_name).replace(file_extensions,'')
 
     return file_name
 
