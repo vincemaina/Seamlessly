@@ -7,3 +7,23 @@ body {
     min-height: 100vh;
     background: #f5f5f5;
 }
+
+
+
+
+/* ------------------------------------------------
+REMOVES ARROWS FROM NUMBER INPUT FIELDS */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* ------------------------------------------------ */
