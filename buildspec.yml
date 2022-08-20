@@ -2,15 +2,15 @@ version: 0.2
 
 phases:
     commands:
-      - echo Entered the install phase...
+      - echo "Entered the install phase...""
   pre_build:
     commands:
-      - echo Entered the pre_build phase...
+      - echo "Entered the pre_build phase..."
   build:
     commands:
-      - echo Entered the build phase...
-      - echo Build started on `date`
+      - echo "Entered the build phase..."
+      - echo "Build started on `date`"
   post_build:
     commands:
-      - echo Entered the post_build phase...
-      - echo Build completed on `date`
+      - echo "Entered the post_build phase..."
+      - echo "Build completed on `date`"
