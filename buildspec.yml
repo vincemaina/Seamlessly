@@ -14,23 +14,17 @@ phases:
       - "echo FFmpeg version:; /opt/ffmpeg/ffmpeg-5.0.1-amd64-static/ffmpeg -version"
       - "sudo ln -sf /opt/ffmpeg/ffmpeg-5.0.1-amd64-static/ffmpeg /usr/bin/ffmpeg"
       - "sudo ln -sf /opt/ffmpeg/ffmpeg-5.0.1-amd64-static/ffprobe /usr/bin/ffprobe"
-      - "echo Adding client_max_body-size to nginx config"
-      # - "sed -i -e 's/client_header_timeout 60;/client_max_body_size 100M;\\n        client_header_timeout 70;/g' /etc/nginx/nginx.conf"
-      - "ls /etc"
   pre_build:
     commands:
       - echo "Entered the pre_build phase..."
-      - "ls /etc"
   build:
     commands:
       - echo "Entered the build phase..."
       - echo "Build started on `date`"
-      - "ls /etc"
   post_build:
     commands:
       - echo "Entered the post_build phase..."
       - echo "Build completed on `date`"
-      - "ls /etc"
 
 artifacts:
   files:
