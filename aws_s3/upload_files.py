@@ -5,7 +5,7 @@ import os
 
 from . callback_class import ProgressPercentage
 
-def upload_file(file_path, bucket, object_path=None):
+def upload_file(file_path, bucket=None, object_path=None):
 
     """Upload a file to an S3 bucket
 
@@ -14,6 +14,12 @@ def upload_file(file_path, bucket, object_path=None):
     :param object_path: S3 object name. If not specified then file_name is used
     :return: True if file was uploaded, else False
     """
+
+    # Check environment variables for bucket name
+    if bucket is None:
+        from dotenv import load_dotenv
+        load_dotenv()
+        bucket = os.environ.get('S3_BUCKET_NAME')
 
     # If S3 object_name was not specified, use file_name
     if object_path is None:
