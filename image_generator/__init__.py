@@ -149,7 +149,9 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
     object_path = f'{file_path}/seamlessly_{file_name}_{creation_time}.{output_format}'
 
     if upload_file(file_path=output_location, object_path=object_path):
-        print('Successfully uploaded to S3 bucket.')
+        print('Successfully uploaded generated media to S3 bucket.')
+    else:
+        print('Failed to upload generated media to S3 bucket.')
 
 
     # from pygifsicle import gifsicle
