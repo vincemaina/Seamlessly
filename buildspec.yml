@@ -12,8 +12,8 @@ phases:
       - "mkdir -p /opt/ffmpeg"
       - "tar xvf /tmp/ffmpeg.tar.xz -C /opt/ffmpeg"
       - "echo FFmpeg version:; /opt/ffmpeg/ffmpeg-5.0.1-amd64-static/ffmpeg -version"
-      - "rm /usr/bin/ffmpeg"
-      - "ln -sf /opt/ffmpeg/ffmpeg-5.0.1-amd64-static/ffmpeg /usr/bin/ffmpeg"
+      - "sudo ln -sf /opt/ffmpeg/ffmpeg-5.0.1-amd64-static/ffmpeg /usr/bin/ffmpeg"
+      - "sudo ln -sf /opt/ffmpeg/ffmpeg-5.0.1-amd64-static/ffprobe /usr/bin/ffprobe"
   pre_build:
     commands:
       - echo "Entered the pre_build phase..."
