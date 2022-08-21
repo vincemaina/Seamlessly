@@ -14,7 +14,7 @@ phases:
       - "mkdir -p /opt/ffmpeg"
       - "tar xvf /tmp/ffmpeg.tar.xz -C /opt/ffmpeg"
       - "echo FFmpeg version:"
-      - "/opt/ffmpeg ls"
+      - "ls /opt/ffmpeg"
       - "/opt/ffmpeg/ffmpeg -version"
       - "cp -a /usr/local/bin/ffmpeg/ffmpeg-5.0.1-amd64-static/ . /usr/local/bin/ffmpeg/"
       - "ln -s /usr/local/bin/ffmpeg/ffmpeg /usr/bin/ffmpeg"
