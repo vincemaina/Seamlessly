@@ -8,8 +8,14 @@ phases:
     commands:
       - "echo Entered the install phase..."
       - "cd /usr/local/bin"
-      - "mkdir ffmpeg && cd ffmpeg"
+      - "mkdir -p ffmpeg && cd ffmpeg"
       - "uname -a"
+      - "wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz"
+      - "tar -xf ffmpeg-release-amd64-static.tar.xz"
+      - "echo FFmpeg version:"
+      - "./ffmpeg -version"
+      - "cp -a /usr/local/bin/ffmpeg/ffmpeg-4.2.1-amd64-static/ . /usr/local/bin/ffmpeg/"
+      - "ln -s /usr/local/bin/ffmpeg/ffmpeg /usr/bin/ffmpeg"
   pre_build:
     commands:
       - echo "Entered the pre_build phase..."
