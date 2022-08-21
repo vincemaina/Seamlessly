@@ -137,6 +137,20 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
     # Executes all of the above
     canvas.run()
 
+    # Uploading file to S3
+    from aws_s3.upload_files import upload_file
+
+
+    generated_file_directory = 'generated_media'
+    prefix = 'download_'
+
+    file_path = os.path.join(generated_file_directory, prefix + creation_time)
+
+    object_path = f'{file_path}/seamlessly_{file_name}_{creation_time}.{output_format}'
+
+    if upload_file(file_path=output_location, object_path=object_path):
+        print('Successfully uploaded to S3 bucket.')
+
 
     # from pygifsicle import gifsicle
     # gifsicle(
