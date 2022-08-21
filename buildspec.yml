@@ -10,6 +10,7 @@ phases:
       - echo "Installing FFmpeg..."
       - sudo apt update
       - sudo apt install ffmpeg
+      - "Y"
       - ffmpeg -version
   pre_build:
     commands:
