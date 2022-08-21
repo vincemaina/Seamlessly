@@ -679,3 +679,5 @@ app/static/js/upload_progress.js
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+.ebextensions/default_nginx.txt
+.ebextensions/
