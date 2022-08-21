@@ -6,12 +6,10 @@ env:
 phases:
   install:
     commands:
-      - echo "Entered the install phase..."
-      - echo "Installing FFmpeg..."
-      - sudo apt update
-      - sudo apt install ffmpeg
-      - "Y"
-      - ffmpeg -version
+      - "echo Entered the install phase..."
+      - "cd /usr/local/bin"
+      - "mkdir ffmpeg && cd ffmpeg"
+      - "uname -a"
   pre_build:
     commands:
       - echo "Entered the pre_build phase..."
