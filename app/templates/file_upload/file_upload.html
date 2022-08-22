@@ -50,7 +50,7 @@
                             </p>
                             <div class="box">
                                     <div class="field is-grouped">
-                                        <input name='uploaded_file' id="uploaded_file" class="input control is-expanded" type="file" accept="video/mp4,video/x-m4v,video/*,video/webm,image/webp,image/*" required>
+                                        <input name='uploaded_file' id="uploaded_file" class="input control is-expanded" type="file" accept="{{accepted_file_types}}" required>
                                     </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="field column is-half">
+                                    <div class="field column is-half" style="display: none;">
                                         <label class="label" for="crop_width">Crop width</label>
                                         <div class="control has-icons-right">
                                             <input class="input is-rounded" type="number" name="crop_width" id="crop_width">
@@ -84,7 +84,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="field column is-half">
+                                    <div class="field column is-half" style="display: none;">
                                         <label class="label" for="crop_height">Crop height</label>
                                         <div class="control has-icons-right">
                                             <input class="input is-rounded" type="number" name="crop_height" id="crop_height">
