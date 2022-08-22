@@ -5,14 +5,15 @@ bp = Blueprint('upload', __name__, url_prefix='/upload')
 user_file_directory = './user_files/'
 
 output_file_types = {
-    'Web-Optimised Background Animation': 'webp',
-    'Web-Optimised Background Image': 'webp',
-    'Mp4': 'mp4',
+    # 'Web-Optimised Background Image': 'webp',
+    # 'Web-Optimised Background Animation': 'webp',
     'WebP': 'webp',
-    'Gif': 'gif',
-    'APng': 'APng',
-    'Jpeg': 'jpg',
-    'Png': 'png'
+    'Mp4': 'mp4',
+    'WebM': 'webm',
+    # 'Gif': 'gif',
+    # 'APng': 'APng',
+    # 'Jpeg': 'jpg',
+    # 'Png': 'png'
 }
 
 @bp.route('/', methods=['GET', 'POST'])
