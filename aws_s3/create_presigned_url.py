@@ -3,7 +3,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 
-def create_presigned_url(object_name, bucket_name = None, expiration=3600):
+def create_presigned_url(object_path, bucket_name = None, expiration=3600):
 
     """Generate a presigned URL to share an S3 object
 
@@ -25,8 +25,9 @@ def create_presigned_url(object_name, bucket_name = None, expiration=3600):
     try:
         response = s3_client.generate_presigned_url('get_object',
                                                     Params={'Bucket': bucket_name,
-                                                            'Key': object_name},
+                                                            'Key': object_path},
                                                     ExpiresIn=expiration)
+    
     except ClientError as e:
         logging.error(e)
         return None
