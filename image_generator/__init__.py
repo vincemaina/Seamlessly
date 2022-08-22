@@ -134,7 +134,8 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
 
     # Defines output file name/path.
     output_location = f'{output_file_path}/seamlessly_{file_name}_{creation_time}.{output_format}'
-    canvas = canvas.output(output_location)
+
+    canvas = canvas.output(output_location, loop=0)
     
     # Executes all of the above
     canvas.run()
