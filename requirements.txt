@@ -8,6 +8,7 @@ docutils==0.14
 ffmpeg-python==0.2.0
 ffmpy==0.3.0
 filelock==3.0.12
+filetype==1.1.0
 Flask==2.2.2
 future==0.18.2
 gevent==21.12.0
