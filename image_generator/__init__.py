@@ -1,4 +1,5 @@
 from app.config import UPLOAD_FOLDER, OUTPUT_FOLDER
+from flask import flash, redirect, url_for
 
 def limit_dimensions(width, height):
 
@@ -73,6 +74,8 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
 
     input_file = ffmpeg.input(file_path)
 
+    success = True
+
 
     # Getting the dimensions of the file the user has submitted
 
@@ -137,104 +140,101 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
 
     canvas = canvas.output(output_location, loop=0)
     
-    # Executes all of the above
-    canvas.run()
+
+    # --------------------------------------------------------------------------------------
+
+    try:
+
+        # Executes all of the above
+        canvas.run()
 
 
+    except ffmpeg._run.Error as e:
 
-    # Uploading file to S3
-    from aws_s3.upload_files import upload_file
+        print('FFmpeg produced an error.', e)
 
-    generated_file_directory = 'generated_media'
-    prefix = 'download_'
+        success = False
 
-    output_file_path = os.path.join(generated_file_directory, prefix + creation_time)
 
-    object_path = f'{output_file_path}/seamlessly_{file_name}_{creation_time}.{output_format}'
-
-    if upload_file(file_path=output_location, object_path=object_path):
-        print('Successfully uploaded generated media to S3 bucket.')
     else:
-        print('Failed to upload generated media to S3 bucket.')
+
+        # Uploading file to S3
+        from aws_s3.upload_files import upload_file
+
+        generated_file_directory = 'generated_media'
+        prefix = 'download_'
+
+        output_file_path = os.path.join(generated_file_directory, prefix + creation_time)
+
+        object_path = f'{output_file_path}/seamlessly_{file_name}_{creation_time}.{output_format}'
+
+        if upload_file(file_path=output_location, object_path=object_path):
+            print('Successfully uploaded generated media to S3 bucket.')
+        
+        else:
+            message = 'Website error: Failed to upload generated image to server.'
+            print(message)
+            flash(message)
+            return redirect(url_for('upload.single_file'))
+
+
+    finally:
+
+        # REMOVING USER UPLOADED FILES
+
+        from pathlib import Path
+
+        print('DELETE:', file_path)
+
+        # This deletes the file
+        dirpath = Path(file_path)
+        try:
+            os.remove(dirpath)
+        except Exception as e:
+            print(e)
+
+        # This deletes the file subfolder IF there are no other files in it.
+        try:
+            folder_path = Path('/'.join(dirpath.parts[:-1]))
+            print('FOLDER PATH:', folder_path) 
+            if folder_path.exists() and folder_path.is_dir():
+                os.rmdir(folder_path)
+                print('Removed directory.')
+        except OSError:
+            print(f'{folder_path} cannot be deleted - folder is not empty yet.')
+
+        # This deletes the entire directory IF there are no other files/folders in it.
+        try:
+            os.rmdir(UPLOAD_FOLDER)
+        except OSError:
+            print(f'{UPLOAD_FOLDER} cannot be deleted - folder is not empty yet.')
     
 
+        # REMOVING GENERATED FILES
 
-    # REMOVING USER UPLOADED FILES
+        print('DELETE:', output_location)
 
-    from pathlib import Path
-    import shutil
+        # This deletes the file
+        dirpath = Path(output_location)
+        try:
+            os.remove(dirpath)
+        except Exception as e:
+            print(e)
 
-    print('DELETE:', file_path)
+        # This deletes the file subfolder IF there are no other files in it.
+        try:
+            folder_path = Path('/'.join(dirpath.parts[:-1]))
+            print('FOLDER PATH:', folder_path) 
+            if folder_path.exists() and folder_path.is_dir():
+                os.rmdir(folder_path)
+                print('Removed directory.')
+        except OSError:
+            print(f'{folder_path} cannot be deleted - folder is not empty yet.')
 
-    # This deletes the file
-    dirpath = Path(file_path)
-    try:
-        os.remove(dirpath)
-    except Exception as e:
-        print(e)
+        # This deletes the entire directory IF there are no other files/folders in it.
+        try:
+            os.rmdir(OUTPUT_FOLDER)
+        except OSError:
+            print(f'{OUTPUT_FOLDER} cannot be deleted - folder is not empty yet.')
 
-    # This deletes the file subfolder IF there are no other files in it.
-    try:
-        folder_path = Path('/'.join(dirpath.parts[:-1]))
-        print('FOLDER PATH:', folder_path) 
-        if folder_path.exists() and folder_path.is_dir():
-            os.rmdir(folder_path)
-            print('Removed directory.')
-    except OSError:
-        print(f'{folder_path} cannot be deleted - folder is not empty yet.')
-
-    # This deletes the entire directory IF there are no other files/folders in it.
-    try:
-        os.rmdir(UPLOAD_FOLDER)
-    except OSError:
-        print(f'{UPLOAD_FOLDER} cannot be deleted - folder is not empty yet.')
-    
-
-
-    # REMOVING GENERATED FILES
-
-    print('DELETE:', output_location)
-
-    # This deletes the file
-    dirpath = Path(output_location)
-    try:
-        os.remove(dirpath)
-    except Exception as e:
-        print(e)
-
-    # This deletes the file subfolder IF there are no other files in it.
-    try:
-        folder_path = Path('/'.join(dirpath.parts[:-1]))
-        print('FOLDER PATH:', folder_path) 
-        if folder_path.exists() and folder_path.is_dir():
-            os.rmdir(folder_path)
-            print('Removed directory.')
-    except OSError:
-        print(f'{folder_path} cannot be deleted - folder is not empty yet.')
-
-    # This deletes the entire directory IF there are no other files/folders in it.
-    try:
-        os.rmdir(OUTPUT_FOLDER)
-    except OSError:
-        print(f'{OUTPUT_FOLDER} cannot be deleted - folder is not empty yet.')
-
-
-    # from pygifsicle import gifsicle
-    # gifsicle(
-    #     sources=['out.gif'], # or a single_file.gif
-    #     destination="out_comp_1.gif", # or just omit it and will use the first source provided.
-    #     optimize=True, # Whetever to add the optimize flag of not
-    #     colors=15, # Number of colors t use
-    #     options=["--verbose"] # Options to use.
-    # )
-
-
-    #     # .output('out.mp4')
-    #     # .run()
-
-    return output_location
-
-
-if __name__ == '__main__':
-
-    generate('user_files/upload_08192022_105858/y-so-serious.png', 'png')
+    return output_location, success

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, send_file, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, flash
 
 bp = Blueprint('process', __name__, url_prefix='/process')
 
@@ -19,8 +19,17 @@ def single_file():
 
     from image_generator import generate
 
-    output_path = generate(file_path, output_format)
+    output_path, success = generate(file_path, output_format)
 
-    output_path = output_path.replace('app/static/', '')
+    if success:
 
-    return redirect(url_for('configure_css.configure', file=output_path))
+        output_path = output_path.replace('app/static/', '')
+
+        return redirect(url_for('configure_css.configure', file=output_path))
+    
+    else:
+
+        message = 'File generation was unsuccessful. Please check the file you submitted is an accepted file type.'
+        flash(message)
+        
+        return redirect(url_for('upload.single_file'))
