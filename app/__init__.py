@@ -4,13 +4,18 @@ load_dotenv()
 
 from flask import Flask, render_template
 
+from . config import file_limit_megabytes
 
 def create_app(test_config=None):
+
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    
+    # configuring app settings
     app.config.from_mapping(
         SECRET_KEY=os.environ['FLASK_SECRET_KEY'],
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+        MAX_CONTENT_LENGTH=file_limit_megabytes*1024*1024,
     )
 
     if test_config is None:
