@@ -9,3 +9,9 @@ file_limit_megabytes = 3
 
 # Accepted input file formats
 INPUT_FILE_TYPES = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'mp4', 'mov', 'mpeg'}
+
+# Path to file upload location
+UPLOAD_FOLDER = 'user_files'
+
+# Path to the files output by ffmpeg
+OUTPUT_FOLDER = 'app/static/generated_media'
