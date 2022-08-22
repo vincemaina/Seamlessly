@@ -1,3 +1,5 @@
+from app.config import UPLOAD_FOLDER, OUTPUT_FOLDER
+
 def limit_dimensions(width, height):
 
     '''Scales down the image to MAX_DIMENSION if either width or height exceed MAX_DIMENSION.'''
@@ -122,31 +124,32 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
 
     # Directory for generated files
 
-    generated_file_directory = 'app/static/generated_media'
+    generated_file_directory = OUTPUT_FOLDER
     prefix = 'download_'
 
     import os
-    file_path = os.path.join(generated_file_directory, prefix + creation_time)
+    output_file_path = os.path.join(generated_file_directory, prefix + creation_time)
 
-    os.makedirs(file_path, exist_ok=True)
+    os.makedirs(output_file_path, exist_ok=True)
 
     # Defines output file name/path.
-    output_location = f'{file_path}/seamlessly_{file_name}_{creation_time}.{output_format}'
+    output_location = f'{output_file_path}/seamlessly_{file_name}_{creation_time}.{output_format}'
     canvas = canvas.output(output_location)
     
     # Executes all of the above
     canvas.run()
 
+
+
     # Uploading file to S3
     from aws_s3.upload_files import upload_file
-
 
     generated_file_directory = 'generated_media'
     prefix = 'download_'
 
-    file_path = os.path.join(generated_file_directory, prefix + creation_time)
+    output_file_path = os.path.join(generated_file_directory, prefix + creation_time)
 
-    object_path = f'{file_path}/seamlessly_{file_name}_{creation_time}.{output_format}'
+    object_path = f'{output_file_path}/seamlessly_{file_name}_{creation_time}.{output_format}'
 
     if upload_file(file_path=output_location, object_path=object_path):
         print('Successfully uploaded generated media to S3 bucket.')
@@ -154,23 +157,65 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
         print('Failed to upload generated media to S3 bucket.')
     
 
-    # Removing user uploaded files
+
+    # REMOVING USER UPLOADED FILES
 
     from pathlib import Path
     import shutil
 
-    dirpath = Path('user_files')
-    if dirpath.exists() and dirpath.is_dir():
-        shutil.rmtree(dirpath)
-        print('Removed directory.')
+    print('DELETE:', file_path)
+
+    # This deletes the file
+    dirpath = Path(file_path)
+    try:
+        os.remove(dirpath)
+    except Exception as e:
+        print(e)
+
+    # This deletes the file subfolder IF there are no other files in it.
+    try:
+        folder_path = Path('/'.join(dirpath.parts[:-1]))
+        print('FOLDER PATH:', folder_path) 
+        if folder_path.exists() and folder_path.is_dir():
+            os.rmdir(folder_path)
+            print('Removed directory.')
+    except OSError:
+        print(f'{folder_path} cannot be deleted - folder is not empty yet.')
+
+    # This deletes the entire directory IF there are no other files/folders in it.
+    try:
+        os.rmdir(UPLOAD_FOLDER)
+    except OSError:
+        print(f'{UPLOAD_FOLDER} cannot be deleted - folder is not empty yet.')
+    
 
 
-    # Removing generated files
+    # REMOVING GENERATED FILES
 
-    dirpath = Path('app/static/generated_media')
-    if dirpath.exists() and dirpath.is_dir():
-        shutil.rmtree(dirpath)
-        print('Removed directory.')
+    print('DELETE:', output_location)
+
+    # This deletes the file
+    dirpath = Path(output_location)
+    try:
+        os.remove(dirpath)
+    except Exception as e:
+        print(e)
+
+    # This deletes the file subfolder IF there are no other files in it.
+    try:
+        folder_path = Path('/'.join(dirpath.parts[:-1]))
+        print('FOLDER PATH:', folder_path) 
+        if folder_path.exists() and folder_path.is_dir():
+            os.rmdir(folder_path)
+            print('Removed directory.')
+    except OSError:
+        print(f'{folder_path} cannot be deleted - folder is not empty yet.')
+
+    # This deletes the entire directory IF there are no other files/folders in it.
+    try:
+        os.rmdir(OUTPUT_FOLDER)
+    except OSError:
+        print(f'{OUTPUT_FOLDER} cannot be deleted - folder is not empty yet.')
 
 
     # from pygifsicle import gifsicle
