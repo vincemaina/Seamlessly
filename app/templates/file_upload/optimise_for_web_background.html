@@ -1,35 +1,101 @@
-{% extends 'layouts/hero_banner_full_height.html' %}
+{% extends 'main.html' %}
 
-{% block hero_body %}
-<div class="hero-body">
-    <div class="container box has-text-left pt-6 pb-6">
-        <div class="column is-8 is-offset-2">
-            <h1 class="title is-size-1" style="color: black;">
-                Preview CSS Background
-            </h1>
-            <div>
-                <p class="subtitle" style="color: black;">
-                    Use this page to configure your css background.
-                </p>
+{% block layout %}
+<div id="loader" class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <img src="{{url_for('static', filename='images/dot-loading-icon.gif')}}" alt="loader" style="width: 75px;">
+            <p class="subtitle">Preview is loading</p>
+        </div>
+    </div>
+</div>
+<section id="top-hero-banner" class="hero is-black is-fullheight" style="background: url('{{image_url}}');">
+    <div id="navbar-id" class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="{{url_for('index')}}">
+                        <div class="title">
+                            <span class="icon">
+                                <i class="fa fa-home"></i>
+                            </span>
+                            <span>Seamlessly</span>
+                        </div>
+                    </a>
+                    <span class="navbar-burger burger" data-target="navbarMenu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </div>
+                <div id="navbarMenu" class="navbar-menu">
+                    <div class="navbar-end">
+                        <span class="navbar-item">
+                            <a class="is-white" href="{{url_for('index')}}">
+                                <span class="icon">
+                                    <i class="fa fa-home"></i>
+                                </span>
+                                <span>Home</span>
+                            </a>
+                        </span>
+
+                        <span class="navbar-item">
+                            <a class="is-white" href="{{url_for('index')}}">
+                                <span class="icon">
+                                    <i class="fa fa-book"></i>
+                                </span>
+                                <span>Guide</span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div class="field">
-                <label for="background-size-slider" class="label">Background size:</label>
-                <div class="control">
-                    <input type="range" min='10' max='1000' name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)">
-                    <!-- <input class="input" type="number" name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)"> -->
+        </nav>
+    </div>
+
+    <div class="hero-body">
+        <div class="container box has-text-left pt-6 pb-6">
+            <div class="column is-8 is-offset-2">
+                <h1 class="title is-size-1" style="color: black;">
+                    Preview CSS Background
+                </h1>
+                <div>
+                    <p class="subtitle" style="color: black;">
+                        Use this page to configure your css background.
+                    </p>
+                </div>
+                <div class="field">
+                    <label for="background-size-slider" class="label">Background size:</label>
+                    <div class="control">
+                        <input type="range" min='10' max='1000' name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)">
+                        <!-- <input class="input" type="number" name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)"> -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
+</section>
 
-{% block body %}
 <style>
     #top-hero-banner {
-        background: url("{{url_for('static', filename=file_path)}}");
         background-size: 500px;
         background-attachment: initial;
+    }
+
+    #loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        z-index: 1000;
+        background-color: #f3fbfe;
+        pointer-events: none;
+        opacity: 1;
+        -webkit-transition: opacity 0.5s ease-in;
+        -moz-transition: opacity 0.5s ease-in;
+        -o-transition: opacity 0.5s ease-in;
+        -ms-transition: opacity 0.5s ease-in;
+        transition: opacity 0.5s ease-in;
     }
 
     #navbar-id {
@@ -37,4 +103,13 @@
     }
 </style>
 <script src="{{url_for('static', filename='js/css_configure.js')}}"></script>
+<img id="image_load_placeholder" src="{{image_url}}" alt="" style="display: none;">
+<script>
+    var img = document.getElementById('image_load_placeholder')
+
+    img.onload = function() {
+        console.log("Image loaded");
+        document.getElementById('loader').style.opacity = 0
+    }
+</script>
 {% endblock %}
