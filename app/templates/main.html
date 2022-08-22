@@ -13,11 +13,11 @@
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div class="p-3" style="position: absolute; width: 100vw; z-index: 100;">
+            <div id="flashed_message_container" class="p-3" style="position: absolute; width: 100vw; z-index: 100;">
                 <article class="message is-danger" style="max-width: 500px; margin: 0 auto;">
                     <div class="message-header">
                         <p>Error</p>
-                        <button class="delete" aria-label="delete"></button>
+                        <button class="delete" aria-label="delete" onclick="document.getElementById('flashed_message_container').style.display = 'None'"></button>
                     </div>
                     <div class="message-body">
                         <ul class=flashes>
