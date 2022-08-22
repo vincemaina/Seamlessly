@@ -53,7 +53,7 @@
         </nav>
     </div>
 
-    <div class="hero-body">
+    <div id='hero-body-customiser' class="hero-body">
         <div class="container box has-text-left pt-6 pb-6">
             <div class="column is-8 is-offset-2">
                 <h1 class="title is-size-1" style="color: black;">
@@ -71,10 +71,24 @@
                         <!-- <input class="input" type="number" name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)"> -->
                     </div>
                 </div>
+                <a href="{{image_url}}" class="button is-success">Download</a>
             </div>
         </div>
     </div>
 </section>
+<div id="show-hide-button">
+    <button class="button is-link" onclick="buttonClick(this)">Hide Controls</button>
+</div>
+
+<style>
+    #show-hide-button {
+        display: initial;
+        position: absolute;
+        bottom: 35px;
+        width: 100vw;
+        text-align: center;
+    }
+</style>
 
 <style>
     #top-hero-banner {
@@ -102,7 +116,44 @@
         background-color: black;
     }
 </style>
+
+<!-- This script updates the page when the user changes a parameter -->
 <script src="{{url_for('static', filename='js/css_configure.js')}}"></script>
+
+<!-- This script hides the controls and the nav bar when the user clicks the hide controls button -->
+<script>
+
+    var navbar = document.getElementById('navbar-id')
+    var customiser_section = document.getElementById('hero-body-customiser')
+
+    function hideControls (button) {
+        navbar.style.display = 'none'
+        customiser_section.style.display = 'none'
+        button.classList.remove("is-link");
+        button.classList.add("is-success");
+        button.innerHTML = 'Show Controls'
+    }
+
+    function showControls (button) {
+        navbar.style.display = 'initial'
+        customiser_section.style.display = 'inherit'
+        button.classList.remove("is-success");
+        button.classList.add("is-link");
+        button.innerHTML = 'Hide Controls'
+    }
+
+    function buttonClick(button) {
+        
+        if (button.innerHTML == 'Hide Controls') {
+            hideControls(button)
+        } else {
+            showControls(button, navbar)
+        }
+    }
+
+</script>
+
+<!-- The below image and script are for managing the loading screen -->
 <img id="image_load_placeholder" src="{{image_url}}" alt="" style="display: none;">
 <script>
     var img = document.getElementById('image_load_placeholder')
@@ -112,4 +163,5 @@
         document.getElementById('loader').style.opacity = 0
     }
 </script>
+
 {% endblock %}
