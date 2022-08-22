@@ -6,3 +6,6 @@ output_file_types = {
 
 # File limit in MBs
 file_limit_megabytes = 3
+
+# Accepted input file formats
+INPUT_FILE_TYPES = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'mp4', 'mov', 'mpeg'}
