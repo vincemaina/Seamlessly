@@ -47,6 +47,12 @@ def create_app(test_config=None):
         return redirect(url_for(homepage))
 
 
+    # HANDLING ERROR PAGES
+
+    from . error_handling import request_entity_is_too_large
+    app.register_error_handler(413, request_entity_is_too_large)
+
+
     # REGISTERING BLUEPRINTS
 
     from . blueprints import upload
