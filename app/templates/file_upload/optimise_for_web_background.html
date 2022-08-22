@@ -9,83 +9,83 @@
         </div>
     </div>
 </div>
-<section id="top-hero-banner" class="hero is-black is-fullheight" style="background: url('{{image_url}}');">
-    <div id="navbar-id" class="hero-head">
-        <nav class="navbar">
-            <div class="container">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="{{url_for('index')}}">
-                        <div class="title">
-                            <span class="icon">
-                                <i class="fa fa-home"></i>
+<div id="page-stretcher" style="width: 100vw; height: 5000px;">
+    <section id="top-hero-banner" class="hero is-black is-fullheight" style="background: url('{{image_url}}'); background-size: 500px; height: 100%;">
+        <div id="navbar-id" class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="{{url_for('index')}}">
+                            <div class="title">
+                                <span class="icon">
+                                    <i class="fa fa-arrow-circle-right"></i>
+                                </span>
+                                <span>Seamlessly</span>
+                            </div>
+                        </a>
+                        <span class="navbar-burger burger" data-target="navbarMenu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </div>
+                    <div id="navbarMenu" class="navbar-menu">
+                        <div class="navbar-end">
+                            <span class="navbar-item">
+                                <a class="is-white" href="{{url_for('index')}}">
+                                    <span class="icon">
+                                        <i class="fa fa-home"></i>
+                                    </span>
+                                    <span>Home</span>
+                                </a>
                             </span>
-                            <span>Seamlessly</span>
+    
+                            <span class="navbar-item">
+                                <a class="is-white" href="{{url_for('index')}}">
+                                    <span class="icon">
+                                        <i class="fa fa-book"></i>
+                                    </span>
+                                    <span>Guide</span>
+                                </a>
+                            </span>
                         </div>
-                    </a>
-                    <span class="navbar-burger burger" data-target="navbarMenu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
-                </div>
-                <div id="navbarMenu" class="navbar-menu">
-                    <div class="navbar-end">
-                        <span class="navbar-item">
-                            <a class="is-white" href="{{url_for('index')}}">
-                                <span class="icon">
-                                    <i class="fa fa-home"></i>
-                                </span>
-                                <span>Home</span>
-                            </a>
-                        </span>
-
-                        <span class="navbar-item">
-                            <a class="is-white" href="{{url_for('index')}}">
-                                <span class="icon">
-                                    <i class="fa fa-book"></i>
-                                </span>
-                                <span>Guide</span>
-                            </a>
-                        </span>
                     </div>
                 </div>
-            </div>
-        </nav>
-    </div>
-
-    <div id='hero-body-customiser' class="hero-body">
-        <div class="container box has-text-left pt-6 pb-6">
-            <div class="column is-8 is-offset-2">
-                <h1 class="title is-size-1" style="color: black;">
-                    Preview CSS Background
-                </h1>
+            </nav>
+        </div>
+    
+        <div id='hero-body-customiser' class="hero-body">
+            <div class="box has-text-left p-6" style="margin: 0 auto;">
                 <div>
-                    <p class="subtitle" style="color: black;">
-                        Use this page to configure your css background.
+                    <h1 class="title is-size-3" style="color: black;">
+                        Preview CSS Background
+                    </h1>
+                    <p class="subtitle is-size-6 mb-3" style="color: black;">
+                        Use this page to configure your css background. Try scrolling to see what it will look like on your website!
                     </p>
-                </div>
-                <div class="field">
-                    <label for="background-size-slider" class="label">Background size:</label>
-                    <div class="control">
-                        <input type="range" min='10' max='1000' name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)">
-                        <!-- <input class="input" type="number" name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)"> -->
+                    <div class="field">
+                        <label for="background-size-slider" class="label">Background size:</label>
+                        <div class="control">
+                            <input type="range" min='10' max='2000' value="500" name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)">
+                            <!-- <input class="input" type="number" name="background-size-slider" id="background-size-slider" onchange="updateBackgroundSize(this)"> -->
+                        </div>
                     </div>
+                    <a href="{{image_url}}" class="button is-success">Download</a>
+                    <!-- <div id='code-preview' class="box">
+                        <code>
+                            body {
+                                background: url('{{image_url}}')
+                                background-size: 500px;
+                                background-repeat: repeat;
+                                background-position: 0 0;
+                            }
+                        </code>
+                    </div> -->
                 </div>
-                <a href="{{image_url}}" class="button is-success">Download</a>
-                <!-- <div id='code-preview' class="box">
-                    <code>
-                        body {
-                            background: url('{{image_url}}')
-                            background-size: 500px;
-                            background-repeat: repeat;
-                            background-position: 0 0;
-                        }
-                    </code>
-                </div> -->
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 <div id="show-hide-button">
     <button class="button is-link" onclick="buttonClick(this)">Hide Controls</button>
 </div>
@@ -93,7 +93,7 @@
 <style>
     #show-hide-button {
         display: initial;
-        position: absolute;
+        position: fixed;
         bottom: 35px;
         width: 100vw;
         text-align: center;
@@ -101,13 +101,13 @@
 </style>
 
 <style>
-    #top-hero-banner {
-        background-size: 500px;
+    /* #top-hero-banner {
+        background-size: 10px;
         background-attachment: initial;
-    }
+    } */
 
     #loader {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
@@ -124,11 +124,26 @@
 
     #navbar-id {
         background-color: black;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        width: 100vw;
     }
+
+    #hero-body-customiser {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+    }
+
 </style>
 
 <!-- This script updates the page when the user changes a parameter -->
 <script src="{{url_for('static', filename='js/css_configure.js')}}"></script>
+
+<!-- This allows the user to keep scrolling forever -->
+<script src="{{url_for('static', filename='js/infinite_scroll.js')}}"></script>
 
 <!-- This script hides the controls and the nav bar when the user clicks the hide controls button -->
 <script>
@@ -171,6 +186,7 @@
     img.onload = function() {
         console.log("Image loaded");
         document.getElementById('loader').style.opacity = 0
+        document.getElementById('loader').style.pointerEvents = 'none'
     }
 </script>
 
