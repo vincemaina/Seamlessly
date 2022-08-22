@@ -152,6 +152,25 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
         print('Successfully uploaded generated media to S3 bucket.')
     else:
         print('Failed to upload generated media to S3 bucket.')
+    
+
+    # Removing user uploaded files
+
+    from pathlib import Path
+    import shutil
+
+    dirpath = Path('user_files')
+    if dirpath.exists() and dirpath.is_dir():
+        shutil.rmtree(dirpath)
+        print('Removed directory.')
+
+
+    # Removing generated files
+
+    dirpath = Path('app/static/generated_media')
+    if dirpath.exists() and dirpath.is_dir():
+        shutil.rmtree(dirpath)
+        print('Removed directory.')
 
 
     # from pygifsicle import gifsicle
