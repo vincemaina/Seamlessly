@@ -58,7 +58,8 @@ def single_file():
 
                     os.makedirs(file_path, exist_ok=True)
 
-                    uploaded_file.save(file_path + '/' + uploaded_file.filename)
+                    from werkzeug.utils import secure_filename
+                    uploaded_file.save(file_path + '/' + secure_filename(uploaded_file.filename))
 
 
                 else:
