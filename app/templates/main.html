@@ -10,6 +10,26 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="p-3" style="position: absolute; width: 100vw; z-index: 100;">
+                <article class="message is-danger" style="max-width: 500px; margin: 0 auto;">
+                    <div class="message-header">
+                        <p>Error</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        <ul class=flashes>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        {% endif %}
+    {% endwith %}
     {% block layout %}{% endblock %}
 </body>
 </html>
