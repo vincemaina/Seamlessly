@@ -31,6 +31,8 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+
+    # INITIALISE DATABASE
     from . import db
     db.init_app(app)
 
