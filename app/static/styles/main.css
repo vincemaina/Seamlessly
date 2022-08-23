@@ -9,7 +9,9 @@ body {
 }
 
 
-
+#signature > a {
+  font-size: 0.8em;
+}
 
 /* ------------------------------------------------
 REMOVES ARROWS FROM NUMBER INPUT FIELDS */
