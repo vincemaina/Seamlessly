@@ -54,6 +54,9 @@ def create_app(test_config=None):
     from . error_handling import request_entity_is_too_large
     app.register_error_handler(413, request_entity_is_too_large)
 
+    from . error_handling import page_not_found
+    app.register_error_handler(404, page_not_found)
+
 
     # REGISTERING BLUEPRINTS
 
