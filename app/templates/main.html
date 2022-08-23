@@ -13,7 +13,7 @@
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div id="flashed_message_container" class="p-6" style="position: absolute; width: 100vw; z-index: 100;">
+            <div id="flashed_message_container" class="p-6" style="position: absolute; width: 100vw; z-index: 100; pointer-events: none;">
                 <article class="message is-danger" style="max-width: 500px; margin: 0 auto;">
                     <div class="message-header">
                         <p>Error</p>
