@@ -49,6 +49,18 @@ def create_app(test_config=None):
         return redirect(url_for(homepage))
 
 
+    # SETTING UP OTHER ROUTES
+
+    @app.route('/help')
+    def guide():
+        
+        from flask import flash, redirect, url_for
+
+        flash('This page has not yet been added.')
+
+        return redirect('https://github.com/vchapandrews/Seamlessly')
+
+
     # HANDLING ERROR PAGES
 
     from . error_handling import request_entity_is_too_large
