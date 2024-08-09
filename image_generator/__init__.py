@@ -156,28 +156,6 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
         success = False
 
 
-    else:
-
-        # Uploading file to S3
-        from aws_s3.upload_files import upload_file
-
-        generated_file_directory = 'generated_media'
-        prefix = 'download_'
-
-        output_file_path = os.path.join(generated_file_directory, prefix + creation_time)
-
-        object_path = f'{output_file_path}/seamlessly_{file_name}_{creation_time}.{output_format}'
-
-        if upload_file(file_path=output_location, object_path=object_path):
-            print('Successfully uploaded generated media to S3 bucket.')
-        
-        else:
-            message = 'Website error: Failed to upload generated image to server.'
-            print(message)
-            flash(message)
-            return redirect(url_for('upload.single_file'))
-
-
     finally:
 
         # REMOVING USER UPLOADED FILES
@@ -188,10 +166,10 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
 
         # This deletes the file
         dirpath = Path(file_path)
-        try:
-            os.remove(dirpath)
-        except Exception as e:
-            print(e)
+        # try:
+        #     os.remove(dirpath)
+        # except Exception as e:
+        #     print(e)
 
         # This deletes the file subfolder IF there are no other files in it.
         try:
@@ -216,10 +194,10 @@ def generate(file_path, output_format, crop_width='iw', crop_height='ih', crop_p
 
         # This deletes the file
         dirpath = Path(output_location)
-        try:
-            os.remove(dirpath)
-        except Exception as e:
-            print(e)
+        # try:
+        #     os.remove(dirpath)
+        # except Exception as e:
+        #     print(e)
 
         # This deletes the file subfolder IF there are no other files in it.
         try:
