@@ -1,7 +1,7 @@
-# ***[Seamlessly](seamlessly.vincemaina.co.uk)***
+# ***[Seamlessly](http://seamlessly.vincemaina.co.uk)***
 ## A web app that produces a "seamless" tile version of the input image — by performing basic mirror transformations.
 
-[Click here](seamlessly.vincemaina.co.uk) to try it out
+[Click here](http://seamlessly.vincemaina.co.uk) to try it out
 
 ## How it works
 
