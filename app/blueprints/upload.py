@@ -1,13 +1,12 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from .. config import OUTPUT_FILE_TYPES, INPUT_FILE_TYPES, UPLOAD_FOLDER
+from .. import file_limit_megabytes
 
 bp = Blueprint('upload', __name__, url_prefix='/upload')
 
-from .. import file_limit_megabytes
 file_limit_bytes = file_limit_megabytes * 1024 * 1024 # Converting into bytes
 
-user_file_directory = './user_files/'
-
-from .. config import OUTPUT_FILE_TYPES, INPUT_FILE_TYPES
+user_file_directory = UPLOAD_FOLDER
 
 def check_file_size(file):
 

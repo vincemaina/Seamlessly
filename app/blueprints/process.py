@@ -1,5 +1,7 @@
 from flask import Blueprint, request, redirect, url_for, flash
 
+from app.config import UPLOAD_FOLDER
+
 bp = Blueprint('process', __name__, url_prefix='/process')
 
 @bp.route('', methods=['GET', 'POST'])
@@ -7,7 +9,7 @@ def single_file():
 
     args = request.args
 
-    root_directory = 'user_files'
+    root_directory = UPLOAD_FOLDER
     file_directory = args['upload_folder']
     file_name = args['file_name']
     output_format = args['output_format']

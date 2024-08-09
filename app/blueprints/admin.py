@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, current_app, request, redirect, url_for, send_from_directory, send_file
 
+from app.config import UPLOAD_FOLDER
+
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 @bp.route('/purge_user_files', methods=['POST'])
@@ -7,7 +9,7 @@ def purge_user_files():
     from pathlib import Path
     import shutil
 
-    dirpath = Path('user_files')
+    dirpath = Path(UPLOAD_FOLDER)
     if dirpath.exists() and dirpath.is_dir():
         shutil.rmtree(dirpath)
         print('Removed directory.')
@@ -28,7 +30,7 @@ def view_user_files():
     import os
     from pathlib import Path
 
-    root = 'user_files'
+    root = UPLOAD_FOLDER
     user_files_directory = {}
 
     with current_app.app_context():

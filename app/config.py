@@ -16,7 +16,7 @@ OUTPUT_FILE_TYPES = {
 }
 
 # Path to file upload location
-UPLOAD_FOLDER = 'user_files'
+UPLOAD_FOLDER = 'app/static/user_files'
 
 # Path to the files output by ffmpeg
 OUTPUT_FOLDER = 'app/static/generated_media'
