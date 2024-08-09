@@ -1,7 +1,7 @@
-# ***[Seamlessly](http://seamlessly.eu-west-2.elasticbeanstalk.com/)***
+# ***[Seamlessly](seamlessly.vincemaina.co.uk)***
 ## A web app that produces a "seamless" tile version of the input image — by performing basic mirror transformations.
 
-[Click here](http://seamlessly.eu-west-2.elasticbeanstalk.com/) to try it out
+[Click here](seamlessly.vincemaina.co.uk) to try it out
 
 ## How it works
 
@@ -24,4 +24,4 @@ For this to work well, you need to use an input file that already has a fairly "
 
 This was just a mini project, so won't be putting anymore time into it unless it generates some interest.
 
-So if *have* stumbled across this app, and would like to see more features added (e.g. more accepted file types) please follow the project, and consider creating an issue [here](https://github.com/vchapandrews/Seamlessly/issues) with your feature request.
+So if *have* stumbled across this app, and would like to see more features added (e.g. more accepted file types) please follow the project, and consider creating an issue [here](https://github.com/vchapandrews/seamlessly/issues) with your feature request.

@@ -58,7 +58,7 @@ def create_app(test_config=None):
 
         flash('This page has not yet been added.')
 
-        return redirect('https://github.com/vchapandrews/Seamlessly')
+        return redirect('https://github.com/vchapandrews/seamlessly')
 
 
     # HANDLING ERROR PAGES
