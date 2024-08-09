@@ -14,6 +14,14 @@ The main use cases I see for this are as follows:
 
 Output file types are designed to be compatible with the css style attribute "background-image".
 
+### BEFORE using Seamlessly
+
+![alt text](before.gif)
+
+### AFTER using Seamlessly
+
+![alt text](after.gif)
+
 
 ## How to get the best results
 
